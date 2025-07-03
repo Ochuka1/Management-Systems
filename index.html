@@ -1,0 +1,3659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nestgen Solutions Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-hover: #2980b9;
+            --secondary-color: #95a5a6;
+            --secondary-hover: #7f8c8d;
+            --danger-color: #e74c3c;
+            --danger-hover: #c0392b;
+            --success-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --border-color: #ddd;
+            --warning-color: #f39c12;
+            --warning-hover: #e67e22;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1 {
+  	   color: #00ffff;
+	} 
+        
+        h1:hover {
+  	   color: #00bfff;
+	} 
+
+	p:hover {
+  	   color: #f08080;
+	} 
+        
+        
+        .header {
+	    
+            display: flex;
+            justify-content: center; /* Centers the entire row horizontally  */
+            margin-bottom: 20px; /* Space before body content */
+        }
+        
+        .content-row {
+            display: flex;
+            align-items: center; /* Vertically centers content */
+            max-width: 800px; /* Adjust this to control how wide the centered content should be */
+        }
+        
+        .content-row-invoice {
+            display: flex;
+            align-items: center; /* Vertically centers content */
+            max-width: 800px; /* Adjust this to control how wide the centered content should be */
+        }
+        
+        .image-invoice {
+            margin-right: 150px; /* Space before body content */
+        }
+        
+        .image-header {
+            margin-right: 150px; /* Space before body content */
+        }
+        
+        .text-header {
+            flex-grow: 1; /* Allows text to take remaining space */
+        }
+        
+        img {
+            max-width: 100%; /* Makes image responsive */
+            height: auto; /* Maintains aspect ratio */
+        }
+        
+        .body-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        logo {
+            position: left;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .content-box {
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: var(--light-color);
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: var(--text-color);
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 25px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .table-modern {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .table-modern th {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .table-modern td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .table-modern tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .table-modern tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .form-title {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        .modern-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .modern-button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .modern-button:active {
+            transform: translateY(0);
+        }
+        
+        .modern-button.secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .modern-button.secondary:hover {
+            background-color: var(--secondary-hover);
+        }
+        
+        .modern-button.danger {
+            background-color: var(--danger-color);
+        }
+        
+        .modern-button.danger:hover {
+            background-color: var(--danger-hover);
+        }
+        
+        .modern-button.warning {
+            background-color: var(--warning-color);
+        }
+        
+        .modern-button.warning:hover {
+            background-color: var(--warning-hover);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 15px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 15px center;
+            background-size: 16px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-inactive {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .status-pending {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #777;
+        }
+        
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        .empty-state h3 {
+            margin: 0 0 10px;
+            color: #555;
+        }
+        
+        .quotation-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .invoice-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .service-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .quotation-item:hover, .invoice-item:hover, .service-item:hover {
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+        
+        .center-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                padding: 0;
+            }
+            
+            .tab {
+                padding: 15px;
+            }
+            
+            .table-modern {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .modern-button {
+                width: 100%;
+            }
+        
+        .image-quotationHTML {
+            margin-right: 150px; /* Space before body content */
+        }
+        
+        .text-quotationHTML {
+            flex-grow: 1; /* Allows text to take remaining space */
+        }
+            
+            .quotation-item {
+                flex-wrap: wrap;
+            }
+            
+            .quotation-item input {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="content-row">
+        	<div class="image-header">
+           		 <img src="Image/Logo.png" alt="Management Logo">
+        	</div>
+        
+       	        <div class="text-container">
+           		 <h1>Nestgen Solutions</h1>
+           		 <p>Your One Stop Tech Community.</p>
+		</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content-box">
+            <div class="tabs">
+                <button class="tab active" onclick="openTab('clients')">
+                    <i class="bi bi-people-fill"></i> Clients
+                </button>
+                <button class="tab" onclick="openTab('services')">
+                    <i class="bi bi-list-check"></i> Services
+                </button>
+                <button class="tab" onclick="openTab('employees')">
+                    <i class="bi bi-person-badge-fill"></i> Employees
+                </button>
+                <button class="tab" onclick="openTab('projects')">
+                    <i class="bi bi-clipboard2-check-fill"></i> Projects
+                </button>
+                <button class="tab" onclick="openTab('quotations')">
+                    <i class="bi bi-file-text"></i> Quotations
+                </button>
+                <button class="tab" onclick="openTab('invoices')">
+                    <i class="bi bi-receipt"></i> Invoices
+                </button>
+                <button class="tab" onclick="openTab('serviceHistory')">
+                    <i class="bi bi-tools"></i> Service History
+                </button>
+            </div>
+
+            <!-- Clients Tab -->
+            <div id="clients" class="tab-content active">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Client Management</h2>
+                    <button class="modern-button" onclick="showAddClientForm()">
+                        <i class="bi bi-plus-lg"></i> Add Client
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="clientSearch" class="search-input" placeholder="Search clients..." onkeyup="searchClients()">
+                </div>
+                
+                <div id="clientForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="clientFormTitle">Add New Client</h3>
+                    <div class="form-group">
+                        <label for="clientName">Company Name</label>
+                        <input type="text" id="clientName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPerson">Contact Person</label>
+                        <input type="text" id="contactPerson" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone">Phone</label>
+                        <input type="text" id="clientPhone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email</label>
+                        <input type="email" id="clientEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientAddress">Address</label>
+                        <textarea id="clientAddress" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientStatus">Status</label>
+                        <select id="clientStatus" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveClient()">
+                            <i class="bi bi-check-lg"></i> Save
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelClientForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Company Name</th>
+                            <th>Contact Person</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsList">
+                        <!-- Client data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="clientsEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-people"></i>
+                    <h3>No Clients Found</h3>
+                    <p>Add your first client to get started</p>
+                    <button class="modern-button" onclick="showAddClientForm()">
+                        <i class="bi bi-plus-lg"></i> Add Client
+                    </button>
+                </div>
+            </div>
+
+            <!-- Services Tab -->
+            <div id="services" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Service Management</h2>
+                    <button class="modern-button" onclick="showAddServiceForm()">
+                        <i class="bi bi-plus-lg"></i> Add Service
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="serviceSearch" class="search-input" placeholder="Search services..." onkeyup="searchServices()">
+                </div>
+                
+                <div id="serviceForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="serviceFormTitle">Add New Service</h3>
+                    <div class="form-group">
+                        <label for="serviceName">Service Name</label>
+                        <input type="text" id="serviceName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceDescription">Description</label>
+                        <textarea id="serviceDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceCategory">Category</label>
+                        <select id="serviceCategory" class="form-control">
+                            <option value="Security">Security</option>
+                            <option value="Management System">Management System</option>
+                            <option value="Networking">Networking</option>
+                            <option value="Computer Supplies">Computer Supplies</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicePrice">Price (KES)</label>
+                        <input type="number" id="servicePrice" class="form-control" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceDuration">Duration</label>
+                        <input type="text" id="serviceDuration" class="form-control" placeholder="e.g., 2 weeks">
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveService()">
+                            <i class="bi bi-check-lg"></i> Save
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelServiceForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesList">
+                        <!-- Service data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="servicesEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-list-check"></i>
+                    <h3>No Services Found</h3>
+                    <p>Add your first service to get started</p>
+                    <button class="modern-button" onclick="showAddServiceForm()">
+                        <i class="bi bi-plus-lg"></i> Add Service
+                    </button>
+                </div>
+            </div>
+
+            <!-- Employees Tab -->
+            <div id="employees" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Employee Management</h2>
+                    <button class="modern-button" onclick="showAddEmployeeForm()">
+                        <i class="bi bi-plus-lg"></i> Add Employee
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="employeeSearch" class="search-input" placeholder="Search employees..." onkeyup="searchEmployees()">
+                </div>
+                
+                <div id="employeeForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="employeeFormTitle">Add New Employee</h3>
+                    <div class="form-group">
+                        <label for="employeeName">Full Name</label>
+                        <input type="text" id="employeeName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeePosition">Position</label>
+                        <input type="text" id="employeePosition" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeeDepartment">Department</label>
+                        <select id="employeeDepartment" class="form-control">
+                            <option value="Security Solutions">Security Solutions</option>
+                            <option value="Management Systems">Management Systems</option>
+                            <option value="Networking">Networking</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Administration">Administration</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeePhone">Phone</label>
+                        <input type="text" id="employeePhone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeeEmail">Email</label>
+                        <input type="email" id="employeeEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="employeeStatus">Status</label>
+                        <select id="employeeStatus" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveEmployee()">
+                            <i class="bi bi-check-lg"></i> Save
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelEmployeeForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="employeesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeesList">
+                        <!-- Employee data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="employeesEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-person-badge"></i>
+                    <h3>No Employees Found</h3>
+                    <p>Add your first employee to get started</p>
+                    <button class="modern-button" onclick="showAddEmployeeForm()">
+                        <i class="bi bi-plus-lg"></i> Add Employee
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projects" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Project Management</h2>
+                    <button class="modern-button" onclick="showAddProjectForm()">
+                        <i class="bi bi-plus-lg"></i> Add Project
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="projectSearch" class="search-input" placeholder="Search projects..." onkeyup="searchProjects()">
+                </div>
+                
+                <div id="projectForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="projectFormTitle">Add New Project</h3>
+                    <div class="form-group">
+                        <label for="projectClient">Client</label>
+                        <select id="projectClient" class="form-control" required>
+                            <!-- Clients will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectService">Service</label>
+                        <select id="projectService" class="form-control" required>
+                            <!-- Services will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectEmployee">Assigned Employee</label>
+                        <select id="projectEmployee" class="form-control" required>
+                            <!-- Employees will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectStartDate">Start Date</label>
+                        <input type="date" id="projectStartDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectEndDate">End Date</label>
+                        <input type="date" id="projectEndDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectStatus">Status</label>
+                        <select id="projectStatus" class="form-control">
+                            <option value="Not Started">Not Started</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="On Hold">On Hold</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectNotes">Notes</label>
+                        <textarea id="projectNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveProject()">
+                            <i class="bi bi-check-lg"></i> Save
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelProjectForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="projectsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client</th>
+                            <th>Service</th>
+                            <th>Assigned To</th>
+                            <th>Start Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsList">
+                        <!-- Project data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="projectsEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-clipboard2"></i>
+                    <h3>No Projects Found</h3>
+                    <p>Add your first project to get started</p>
+                    <button class="modern-button" onclick="showAddProjectForm()">
+                        <i class="bi bi-plus-lg"></i> Add Project
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quotations Tab -->
+            <div id="quotations" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Quotation Management</h2>
+                    <button class="modern-button" onclick="showCreateQuotationForm()">
+                        <i class="bi bi-plus-lg"></i> Create Quotation
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="quotationSearch" class="search-input" placeholder="Search quotations..." onkeyup="searchQuotations()">
+                </div>
+                
+                <div id="quotationForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="quotationFormTitle">Create New Quotation</h3>
+                    
+                    <div class="form-group">
+                        <label for="quotationClient">Client</label>
+                        <select id="quotationClient" class="form-control" required>
+                            <option value="">Select Client</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationNumber">Quotation Number</label>
+                        <input type="text" id="quotationNumber" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationDate">Date</label>
+                        <input type="date" id="quotationDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationRef">Reference Number</label>
+                        <input type="text" id="quotationRef" class="form-control" placeholder="e.g. +/-3+2/4/9/23">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Items</label>
+                        <div id="quotationItems" style="margin-bottom: 15px;">
+                            <!-- Items will be added here -->
+                        </div>
+                        <button type="button" class="modern-button secondary" onclick="addQuotationItem()">
+                            <i class="bi bi-plus"></i> Add Item
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationLabor">Labor & Transport (KES)</label>
+                        <input type="number" id="quotationLabor" class="form-control" step="0.01" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationVAT">VAT Status</label>
+                        <select id="quotationVAT" class="form-control">
+                            <option value="exclusive">VAT Exclusive</option>
+                            <option value="inclusive">VAT Inclusive</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quotationNotes">Notes</label>
+                        <textarea id="quotationNotes" class="form-control" rows="3" placeholder="Thanks for your business..."></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveQuotation()">
+                            <i class="bi bi-check-lg"></i> Save Quotation
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelQuotationForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="quotationsTable">
+                    <thead>
+                        <tr>
+                            <th>Quotation #</th>
+                            <th>Client</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quotationsList">
+                        <!-- Quotation data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="quotationsEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-file-text"></i>
+                    <h3>No Quotations Found</h3>
+                    <p>Create your first quotation to get started</p>
+                    <button class="modern-button" onclick="showCreateQuotationForm()">
+                        <i class="bi bi-plus-lg"></i> Create Quotation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Invoices Tab -->
+            <div id="invoices" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Invoice Management</h2>
+                    <button class="modern-button" onclick="showCreateInvoiceForm()">
+                        <i class="bi bi-plus-lg"></i> Create Invoice
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="invoiceSearch" class="search-input" placeholder="Search invoices..." onkeyup="searchInvoices()">
+                </div>
+                
+                <div id="invoiceForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="invoiceFormTitle">Create New Invoice</h3>
+                    <div class="form-group">
+                        <label for="invoiceClient">Client</label>
+                        <select id="invoiceClient" class="form-control" required onchange="loadClientProjects(this.value)">
+                            <option value="">Select Client</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoiceProject">Project/Service</label>
+                        <select id="invoiceProject" class="form-control" required>
+                            <option value="">Select Project/Service</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Items</label>
+                        <div id="invoiceItems" style="margin-bottom: 15px;">
+                            <!-- Items will be added here -->
+                        </div>
+                        <button type="button" class="modern-button secondary" onclick="addInvoiceItem()">
+                            <i class="bi bi-plus"></i> Add Item
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoiceDate">Invoice Date</label>
+                        <input type="date" id="invoiceDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoiceDueDate">Due Date</label>
+                        <input type="date" id="invoiceDueDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoiceStatus">Status</label>
+                        <select id="invoiceStatus" class="form-control">
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Overdue">Overdue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="invoiceNotes">Notes</label>
+                        <textarea id="invoiceNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveInvoice()">
+                            <i class="bi bi-check-lg"></i> Save Invoice
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelInvoiceForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="invoicesTable">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Client</th>
+                            <th>Date</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoicesList">
+                        <!-- Invoice data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="invoicesEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-receipt"></i>
+                    <h3>No Invoices Found</h3>
+                    <p>Create your first invoice to get started</p>
+                    <button class="modern-button" onclick="showCreateInvoiceForm()">
+                        <i class="bi bi-plus-lg"></i> Create Invoice
+                    </button>
+                </div>
+            </div>
+
+            <!-- Service History Tab -->
+            <div id="serviceHistory" class="tab-content">
+                <div class="d-flex" style="justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0;">Service History</h2>
+                    <button class="modern-button" onclick="showAddServiceHistoryForm()">
+                        <i class="bi bi-plus-lg"></i> Add Service Record
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="serviceHistorySearch" class="search-input" placeholder="Search service history..." onkeyup="searchServiceHistory()">
+                </div>
+                
+                <div id="serviceHistoryForm" class="form-container" style="display: none;">
+                    <h3 class="form-title" id="serviceHistoryFormTitle">Add Service Record</h3>
+                    <div class="form-group">
+                        <label for="serviceHistoryProject">Project</label>
+                        <select id="serviceHistoryProject" class="form-control" required onchange="loadProjectDetails(this.value)">
+                            <option value="">Select Project</option>
+                            <!-- Completed projects will be populated here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryClient">Client</label>
+                        <input type="text" id="serviceHistoryClient" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryService">Service</label>
+                        <input type="text" id="serviceHistoryService" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryLocation">Location/Area</label>
+                        <input type="text" id="serviceHistoryLocation" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryEmployee">Serviced By</label>
+                        <select id="serviceHistoryEmployee" class="form-control" required>
+                            <option value="">Select Employee</option>
+                            <!-- Employees will be populated here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryDate">Service Date</label>
+                        <input type="date" id="serviceHistoryDate" class="form-control" required value="${new Date().toISOString().split('T')[0]}">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryNextDate">Next Service Date</label>
+                        <input type="date" id="serviceHistoryNextDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Materials Used/Replaced</label>
+                        <div id="serviceHistoryMaterials" style="margin-bottom: 15px;">
+                            <!-- Materials will be added here -->
+                        </div>
+                        <button type="button" class="modern-button secondary" onclick="addServiceMaterial()">
+                            <i class="bi bi-plus"></i> Add Material
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceHistoryNotes">Service Notes</label>
+                        <textarea id="serviceHistoryNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="modern-button" onclick="saveServiceHistory()">
+                            <i class="bi bi-check-lg"></i> Save Record
+                        </button>
+                        <button class="modern-button secondary" onclick="cancelServiceHistoryForm()">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <table class="table-modern" id="serviceHistoryTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Client</th>
+                            <th>Project</th>
+                            <th>Location</th>
+                            <th>Serviced By</th>
+                            <th>Service Date</th>
+                            <th>Next Service</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serviceHistoryList">
+                        <!-- Service history data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <div id="serviceHistoryEmpty" class="empty-state" style="display: none;">
+                    <i class="bi bi-tools"></i>
+                    <h3>No Service Records Found</h3>
+                    <p>Add your first service record to get started</p>
+                    <button class="modern-button" onclick="showAddServiceHistoryForm()">
+                        <i class="bi bi-plus-lg"></i> Add Service Record
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quotation Preview Modal -->
+    <div id="quotationPreviewModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Quotation Preview</h2>
+                <button class="modal-close" onclick="closeQuotationPreview()">&times;</button>
+            </div>
+            <div id="quotationPreviewContent"></div>
+            <div class="modal-footer">
+                <button class="modern-button secondary" onclick="closeQuotationPreview()">
+                    <i class="bi bi-x-lg"></i> Close
+                </button>
+                <button class="modern-button" onclick="printQuotation()">
+                    <i class="bi bi-printer"></i> Print
+                </button>
+                <button class="modern-button" onclick="shareQuotationViaWhatsApp()">
+                    <i class="bi bi-whatsapp"></i> Share via WhatsApp
+                </button>
+                <button class="modern-button" onclick="convertQuotationToInvoice()">
+                    <i class="bi bi-receipt"></i> Convert to Invoice
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invoice Preview Modal -->
+    <div id="invoicePreviewModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Invoice Preview</h2>
+                <button class="modal-close" onclick="closeInvoicePreview()">&times;</button>
+            </div>
+            <div id="invoicePreviewContent"></div>
+            <div class="modal-footer">
+                <button class="modern-button secondary" onclick="closeInvoicePreview()">
+                    <i class="bi bi-x-lg"></i> Close
+                </button>
+                <button class="modern-button" onclick="printInvoice()">
+                    <i class="bi bi-printer"></i> Print
+                </button>
+                <button class="modern-button" onclick="shareInvoiceViaWhatsApp()">
+                    <i class="bi bi-whatsapp"></i> Share via WhatsApp
+                </button>
+                <button class="modern-button" onclick="downloadInvoicePDF()">
+                    <i class="bi bi-file-earmark-pdf"></i> Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service History Details Modal -->
+    <div id="serviceHistoryDetailsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Service Details</h2>
+                <button class="modal-close" onclick="closeServiceHistoryDetails()">&times;</button>
+            </div>
+            <div id="serviceHistoryDetailsContent"></div>
+            <div class="modal-footer">
+                <button class="modern-button secondary" onclick="closeServiceHistoryDetails()">
+                    <i class="bi bi-x-lg"></i> Close
+                </button>
+                <button class="modern-button warning" onclick="sendServiceReminder()">
+                    <i class="bi bi-whatsapp"></i> Send Reminder
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage (in a real app, this would be a database)
+        let clients = JSON.parse(localStorage.getItem('nestgen_clients')) || [];
+        let services = JSON.parse(localStorage.getItem('nestgen_services')) || [];
+        let employees = JSON.parse(localStorage.getItem('nestgen_employees')) || [];
+        let projects = JSON.parse(localStorage.getItem('nestgen_projects')) || [];
+        let quotations = JSON.parse(localStorage.getItem('nestgen_quotations')) || [];
+        let invoices = JSON.parse(localStorage.getItem('nestgen_invoices')) || [];
+        let serviceHistory = JSON.parse(localStorage.getItem('nestgen_serviceHistory')) || [];
+        
+        // Current editing IDs
+        let currentClientId = null;
+        let currentServiceId = null;
+        let currentEmployeeId = null;
+        let currentProjectId = null;
+        let currentQuotationId = null;
+        let currentInvoiceId = null;
+        let currentServiceHistoryId = null;
+
+        // Next numbers
+        let nextQuotationNumber = quotations.length > 0 ? Math.max(...quotations.map(q => parseInt(q.number.replace('Q-', '')))) + 1 : 1000;
+        let nextInvoiceNumber = invoices.length > 0 ? Math.max(...invoices.map(i => parseInt(i.number.replace('INV-', '')))) + 1 : 1000;
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            renderClients();
+            renderServices();
+            renderEmployees();
+            renderProjects();
+            renderQuotations();
+            renderInvoices();
+            renderServiceHistory();
+            
+            populateClientDropdowns();
+            populateServiceDropdown();
+            populateEmployeeDropdown();
+            populateCompletedProjectsDropdown();
+            populateServiceHistoryEmployeeDropdown();
+            
+            // Check for upcoming service dates
+            checkServiceReminders();
+            
+            // Add sample data if empty
+            if (clients.length === 0 && services.length === 0 && employees.length === 0) {
+                addSampleData();
+            }
+        });
+
+        // Tab navigation
+        function openTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`.tab[onclick="openTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // ========== CLIENT FUNCTIONS ==========
+        function showAddClientForm() {
+            currentClientId = null;
+            document.getElementById('clientFormTitle').textContent = 'Add New Client';
+            document.getElementById('clientName').value = '';
+            document.getElementById('contactPerson').value = '';
+            document.getElementById('clientPhone').value = '';
+            document.getElementById('clientEmail').value = '';
+            document.getElementById('clientAddress').value = '';
+            document.getElementById('clientStatus').value = 'Active';
+            document.getElementById('clientForm').style.display = 'block';
+            document.getElementById('clientName').focus();
+        }
+
+        function showEditClientForm(id) {
+            const client = clients.find(c => c.id === id);
+            if (client) {
+                currentClientId = id;
+                document.getElementById('clientFormTitle').textContent = 'Edit Client';
+                document.getElementById('clientName').value = client.name;
+                document.getElementById('contactPerson').value = client.contactPerson;
+                document.getElementById('clientPhone').value = client.phone;
+                document.getElementById('clientEmail').value = client.email;
+                document.getElementById('clientAddress').value = client.address || '';
+                document.getElementById('clientStatus').value = client.status || 'Active';
+                document.getElementById('clientForm').style.display = 'block';
+                document.getElementById('clientName').focus();
+            }
+        }
+
+        function cancelClientForm() {
+            document.getElementById('clientForm').style.display = 'none';
+        }
+
+        function saveClient() {
+            const name = document.getElementById('clientName').value.trim();
+            const contactPerson = document.getElementById('contactPerson').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const address = document.getElementById('clientAddress').value.trim();
+            const status = document.getElementById('clientStatus').value;
+            const registrationDate = new Date().toISOString().split('T')[0];
+
+            if (!name || !contactPerson || !phone || !email) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            try {
+                if (currentClientId) {
+                    // Update existing client
+                    const index = clients.findIndex(c => c.id === currentClientId);
+                    if (index !== -1) {
+                        clients[index] = {
+                            id: currentClientId,
+                            name,
+                            contactPerson,
+                            phone,
+                            email,
+                            address,
+                            status,
+                            registrationDate: clients[index].registrationDate
+                        };
+                        showToast('Client updated successfully');
+                    }
+                } else {
+                    // Add new client
+                    const newClient = {
+                        id: Date.now(),
+                        name,
+                        contactPerson,
+                        phone,
+                        email,
+                        address,
+                        status,
+                        registrationDate
+                    };
+                    clients.push(newClient);
+                    showToast('Client added successfully');
+                }
+
+                localStorage.setItem('nestgen_clients', JSON.stringify(clients));
+                renderClients();
+                populateClientDropdowns();
+                cancelClientForm();
+            } catch (error) {
+                showToast('Error saving client: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteClient(id) {
+            const client = clients.find(c => c.id === id);
+            if (!client) return;
+
+            const confirmed = await showConfirmDialog(`Delete Client`, `Are you sure you want to delete ${client.name}? This action cannot be undone.`);
+            if (confirmed) {
+                try {
+                    clients = clients.filter(c => c.id !== id);
+                    localStorage.setItem('nestgen_clients', JSON.stringify(clients));
+                    renderClients();
+                    populateClientDropdowns();
+                    showToast('Client deleted successfully');
+                } catch (error) {
+                    showToast('Error deleting client: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function renderClients() {
+            const clientsList = document.getElementById('clientsList');
+            clientsList.innerHTML = '';
+            
+            if (clients.length === 0) {
+                document.getElementById('clientsEmpty').style.display = 'block';
+                document.getElementById('clientsTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('clientsEmpty').style.display = 'none';
+            document.getElementById('clientsTable').style.display = 'table';
+            
+            clients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${client.id}</td>
+                    <td>${client.name}</td>
+                    <td>${client.contactPerson}</td>
+                    <td>${client.phone}</td>
+                    <td><span class="status-badge ${client.status === 'Active' ? 'status-active' : 'status-inactive'}">${client.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditClientForm(${client.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteClient(${client.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                clientsList.appendChild(row);
+            });
+        }
+
+        function searchClients() {
+            const searchTerm = document.getElementById('clientSearch').value.toLowerCase();
+            const filteredClients = clients.filter(client => 
+                client.name.toLowerCase().includes(searchTerm) || 
+                client.contactPerson.toLowerCase().includes(searchTerm) ||
+                client.phone.toLowerCase().includes(searchTerm) ||
+                client.email.toLowerCase().includes(searchTerm) ||
+                client.status.toLowerCase().includes(searchTerm)
+            );
+            
+            const clientsList = document.getElementById('clientsList');
+            clientsList.innerHTML = '';
+            
+            if (filteredClients.length === 0) {
+                clientsList.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            No clients found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredClients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${client.id}</td>
+                    <td>${client.name}</td>
+                    <td>${client.contactPerson}</td>
+                    <td>${client.phone}</td>
+                    <td><span class="status-badge ${client.status === 'Active' ? 'status-active' : 'status-inactive'}">${client.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditClientForm(${client.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteClient(${client.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                clientsList.appendChild(row);
+            });
+        }
+
+        // ========== SERVICE FUNCTIONS ==========
+        function showAddServiceForm() {
+            currentServiceId = null;
+            document.getElementById('serviceFormTitle').textContent = 'Add New Service';
+            document.getElementById('serviceName').value = '';
+            document.getElementById('serviceDescription').value = '';
+            document.getElementById('serviceCategory').value = 'Security';
+            document.getElementById('servicePrice').value = '';
+            document.getElementById('serviceDuration').value = '';
+            document.getElementById('serviceForm').style.display = 'block';
+            document.getElementById('serviceName').focus();
+        }
+
+        function showEditServiceForm(id) {
+            const service = services.find(s => s.id === id);
+            if (service) {
+                currentServiceId = id;
+                document.getElementById('serviceFormTitle').textContent = 'Edit Service';
+                document.getElementById('serviceName').value = service.name;
+                document.getElementById('serviceDescription').value = service.description || '';
+                document.getElementById('serviceCategory').value = service.category || 'Security';
+                document.getElementById('servicePrice').value = service.price || '';
+                document.getElementById('serviceDuration').value = service.duration || '';
+                document.getElementById('serviceForm').style.display = 'block';
+                document.getElementById('serviceName').focus();
+            }
+        }
+
+        function cancelServiceForm() {
+            document.getElementById('serviceForm').style.display = 'none';
+        }
+
+        function saveService() {
+            const name = document.getElementById('serviceName').value.trim();
+            const description = document.getElementById('serviceDescription').value.trim();
+            const category = document.getElementById('serviceCategory').value;
+            const price = parseFloat(document.getElementById('servicePrice').value) || 0;
+            const duration = document.getElementById('serviceDuration').value.trim();
+
+            if (!name) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            try {
+                if (currentServiceId) {
+                    // Update existing service
+                    const index = services.findIndex(s => s.id === currentServiceId);
+                    if (index !== -1) {
+                        services[index] = {
+                            id: currentServiceId,
+                            name,
+                            description,
+                            category,
+                            price,
+                            duration
+                        };
+                        showToast('Service updated successfully');
+                    }
+                } else {
+                    // Add new service
+                    const newService = {
+                        id: Date.now(),
+                        name,
+                        description,
+                        category,
+                        price,
+                        duration
+                    };
+                    services.push(newService);
+                    showToast('Service added successfully');
+                }
+
+                localStorage.setItem('nestgen_services', JSON.stringify(services));
+                renderServices();
+                populateServiceDropdown();
+                cancelServiceForm();
+            } catch (error) {
+                showToast('Error saving service: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteService(id) {
+            const service = services.find(s => s.id === id);
+            if (!service) return;
+
+            const confirmed = await showConfirmDialog(`Delete Service`, `Are you sure you want to delete ${service.name}? This action cannot be undone.`);
+            if (confirmed) {
+                try {
+                    services = services.filter(s => s.id !== id);
+                    localStorage.setItem('nestgen_services', JSON.stringify(services));
+                    renderServices();
+                    populateServiceDropdown();
+                    showToast('Service deleted successfully');
+                } catch (error) {
+                    showToast('Error deleting service: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function renderServices() {
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            
+            if (services.length === 0) {
+                document.getElementById('servicesEmpty').style.display = 'block';
+                document.getElementById('servicesTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('servicesEmpty').style.display = 'none';
+            document.getElementById('servicesTable').style.display = 'table';
+            
+            services.forEach(service => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${service.id}</td>
+                    <td>${service.name}</td>
+                    <td>${service.category}</td>
+                    <td>${service.price ? service.price.toLocaleString('en-KE', {style: 'currency', currency: 'KES'}) : 'N/A'}</td>
+                    <td>
+                        <button class="modern-button" onclick="showEditServiceForm(${service.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteService(${service.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                servicesList.appendChild(row);
+            });
+        }
+
+        function searchServices() {
+            const searchTerm = document.getElementById('serviceSearch').value.toLowerCase();
+            const filteredServices = services.filter(service => 
+                service.name.toLowerCase().includes(searchTerm) || 
+                service.category.toLowerCase().includes(searchTerm) ||
+                service.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            
+            if (filteredServices.length === 0) {
+                servicesList.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 30px;">
+                            No services found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredServices.forEach(service => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${service.id}</td>
+                    <td>${service.name}</td>
+                    <td>${service.category}</td>
+                    <td>${service.price ? service.price.toLocaleString('en-KE', {style: 'currency', currency: 'KES'}) : 'N/A'}</td>
+                    <td>
+                        <button class="modern-button" onclick="showEditServiceForm(${service.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteService(${service.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                servicesList.appendChild(row);
+            });
+        }
+
+        // ========== EMPLOYEE FUNCTIONS ==========
+        function showAddEmployeeForm() {
+            currentEmployeeId = null;
+            document.getElementById('employeeFormTitle').textContent = 'Add New Employee';
+            document.getElementById('employeeName').value = '';
+            document.getElementById('employeePosition').value = '';
+            document.getElementById('employeeDepartment').value = 'Security Solutions';
+            document.getElementById('employeePhone').value = '';
+            document.getElementById('employeeEmail').value = '';
+            document.getElementById('employeeStatus').value = 'Active';
+            document.getElementById('employeeForm').style.display = 'block';
+            document.getElementById('employeeName').focus();
+        }
+
+        function showEditEmployeeForm(id) {
+            const employee = employees.find(e => e.id === id);
+            if (employee) {
+                currentEmployeeId = id;
+                document.getElementById('employeeFormTitle').textContent = 'Edit Employee';
+                document.getElementById('employeeName').value = employee.name;
+                document.getElementById('employeePosition').value = employee.position;
+                document.getElementById('employeeDepartment').value = employee.department;
+                document.getElementById('employeePhone').value = employee.phone;
+                document.getElementById('employeeEmail').value = employee.email;
+                document.getElementById('employeeStatus').value = employee.status || 'Active';
+                document.getElementById('employeeForm').style.display = 'block';
+                document.getElementById('employeeName').focus();
+            }
+        }
+
+        function cancelEmployeeForm() {
+            document.getElementById('employeeForm').style.display = 'none';
+        }
+
+        function saveEmployee() {
+            const name = document.getElementById('employeeName').value.trim();
+            const position = document.getElementById('employeePosition').value.trim();
+            const department = document.getElementById('employeeDepartment').value;
+            const phone = document.getElementById('employeePhone').value.trim();
+            const email = document.getElementById('employeeEmail').value.trim();
+            const status = document.getElementById('employeeStatus').value;
+            const hireDate = new Date().toISOString().split('T')[0];
+
+            if (!name || !position || !phone || !email) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            try {
+                if (currentEmployeeId) {
+                    // Update existing employee
+                    const index = employees.findIndex(e => e.id === currentEmployeeId);
+                    if (index !== -1) {
+                        employees[index] = {
+                            id: currentEmployeeId,
+                            name,
+                            position,
+                            department,
+                            phone,
+                            email,
+                            status,
+                            hireDate: employees[index].hireDate
+                        };
+                        showToast('Employee updated successfully');
+                    }
+                } else {
+                    // Add new employee
+                    const newEmployee = {
+                        id: Date.now(),
+                        name,
+                        position,
+                        department,
+                        phone,
+                        email,
+                        status,
+                        hireDate
+                    };
+                    employees.push(newEmployee);
+                    showToast('Employee added successfully');
+                }
+
+                localStorage.setItem('nestgen_employees', JSON.stringify(employees));
+                renderEmployees();
+                populateEmployeeDropdown();
+                populateServiceHistoryEmployeeDropdown();
+                cancelEmployeeForm();
+            } catch (error) {
+                showToast('Error saving employee: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteEmployee(id) {
+            const employee = employees.find(e => e.id === id);
+            if (!employee) return;
+
+            const confirmed = await showConfirmDialog(`Delete Employee`, `Are you sure you want to delete ${employee.name}? This action cannot be undone.`);
+            if (confirmed) {
+                try {
+                    employees = employees.filter(e => e.id !== id);
+                    localStorage.setItem('nestgen_employees', JSON.stringify(employees));
+                    renderEmployees();
+                    populateEmployeeDropdown();
+                    populateServiceHistoryEmployeeDropdown();
+                    showToast('Employee deleted successfully');
+                } catch (error) {
+                    showToast('Error deleting employee: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function renderEmployees() {
+            const employeesList = document.getElementById('employeesList');
+            employeesList.innerHTML = '';
+            
+            if (employees.length === 0) {
+                document.getElementById('employeesEmpty').style.display = 'block';
+                document.getElementById('employeesTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('employeesEmpty').style.display = 'none';
+            document.getElementById('employeesTable').style.display = 'table';
+            
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${employee.id}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.position}</td>
+                    <td>${employee.department}</td>
+                    <td><span class="status-badge ${employee.status === 'Active' ? 'status-active' : 'status-inactive'}">${employee.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditEmployeeForm(${employee.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteEmployee(${employee.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                employeesList.appendChild(row);
+            });
+        }
+
+        function searchEmployees() {
+            const searchTerm = document.getElementById('employeeSearch').value.toLowerCase();
+            const filteredEmployees = employees.filter(employee => 
+                employee.name.toLowerCase().includes(searchTerm) || 
+                employee.position.toLowerCase().includes(searchTerm) ||
+                employee.department.toLowerCase().includes(searchTerm) ||
+                employee.phone.toLowerCase().includes(searchTerm) ||
+                employee.status.toLowerCase().includes(searchTerm)
+            );
+            
+            const employeesList = document.getElementById('employeesList');
+            employeesList.innerHTML = '';
+            
+            if (filteredEmployees.length === 0) {
+                employeesList.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            No employees found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredEmployees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${employee.id}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.position}</td>
+                    <td>${employee.department}</td>
+                    <td><span class="status-badge ${employee.status === 'Active' ? 'status-active' : 'status-inactive'}">${employee.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditEmployeeForm(${employee.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteEmployee(${employee.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                employeesList.appendChild(row);
+            });
+        }
+
+        // ========== PROJECT FUNCTIONS ==========
+        function showAddProjectForm() {
+            currentProjectId = null;
+            document.getElementById('projectFormTitle').textContent = 'Add New Project';
+            document.getElementById('projectClient').value = '';
+            document.getElementById('projectService').value = '';
+            document.getElementById('projectEmployee').value = '';
+            document.getElementById('projectStartDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('projectEndDate').value = '';
+            document.getElementById('projectStatus').value = 'Not Started';
+            document.getElementById('projectNotes').value = '';
+            document.getElementById('projectForm').style.display = 'block';
+        }
+
+        function showEditProjectForm(id) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                currentProjectId = id;
+                document.getElementById('projectFormTitle').textContent = 'Edit Project';
+                document.getElementById('projectClient').value = project.clientId;
+                document.getElementById('projectService').value = project.serviceId;
+                document.getElementById('projectEmployee').value = project.employeeId;
+                document.getElementById('projectStartDate').value = project.startDate;
+                document.getElementById('projectEndDate').value = project.endDate || '';
+                document.getElementById('projectStatus').value = project.status || 'Not Started';
+                document.getElementById('projectNotes').value = project.notes || '';
+                document.getElementById('projectForm').style.display = 'block';
+            }
+        }
+
+        function cancelProjectForm() {
+            document.getElementById('projectForm').style.display = 'none';
+        }
+
+        function saveProject() {
+            const clientId = parseInt(document.getElementById('projectClient').value);
+            const serviceId = parseInt(document.getElementById('projectService').value);
+            const employeeId = parseInt(document.getElementById('projectEmployee').value);
+            const startDate = document.getElementById('projectStartDate').value;
+            const endDate = document.getElementById('projectEndDate').value || null;
+            const status = document.getElementById('projectStatus').value;
+            const notes = document.getElementById('projectNotes').value.trim();
+
+            if (!clientId || !serviceId || !employeeId || !startDate) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            const client = clients.find(c => c.id === clientId);
+            const service = services.find(s => s.id === serviceId);
+            const employee = employees.find(e => e.id === employeeId);
+
+            if (!client || !service || !employee) {
+                showToast('Invalid client, service, or employee selected', 'error');
+                return;
+            }
+
+            try {
+                if (currentProjectId) {
+                    // Update existing project
+                    const index = projects.findIndex(p => p.id === currentProjectId);
+                    if (index !== -1) {
+                        projects[index] = {
+                            id: currentProjectId,
+                            clientId,
+                            serviceId,
+                            employeeId,
+                            startDate,
+                            endDate,
+                            status,
+                            notes,
+                            clientName: client.name,
+                            serviceName: service.name,
+                            employeeName: employee.name
+                        };
+                        showToast('Project updated successfully');
+                    }
+                } else {
+                    // Add new project
+                    const newProject = {
+                        id: Date.now(),
+                        clientId,
+                        serviceId,
+                        employeeId,
+                        startDate,
+                        endDate,
+                        status,
+                        notes,
+                        clientName: client.name,
+                        serviceName: service.name,
+                        employeeName: employee.name
+                    };
+                    projects.push(newProject);
+                    showToast('Project added successfully');
+                }
+
+                localStorage.setItem('nestgen_projects', JSON.stringify(projects));
+                renderProjects();
+                populateCompletedProjectsDropdown();
+                cancelProjectForm();
+            } catch (error) {
+                showToast('Error saving project: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+
+            const confirmed = await showConfirmDialog(`Delete Project`, `Are you sure you want to delete this project? This action cannot be undone.`);
+            if (confirmed) {
+                try {
+                    projects = projects.filter(p => p.id !== id);
+                    localStorage.setItem('nestgen_projects', JSON.stringify(projects));
+                    renderProjects();
+                    populateCompletedProjectsDropdown();
+                    showToast('Project deleted successfully');
+                } catch (error) {
+                    showToast('Error deleting project: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function renderProjects() {
+            const projectsList = document.getElementById('projectsList');
+            projectsList.innerHTML = '';
+            
+            if (projects.length === 0) {
+                document.getElementById('projectsEmpty').style.display = 'block';
+                document.getElementById('projectsTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('projectsEmpty').style.display = 'none';
+            document.getElementById('projectsTable').style.display = 'table';
+            
+            projects.forEach(project => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${project.id}</td>
+                    <td>${project.clientName}</td>
+                    <td>${project.serviceName}</td>
+                    <td>${project.employeeName}</td>
+                    <td>${formatDate(project.startDate)}</td>
+                    <td><span class="status-badge">${project.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditProjectForm(${project.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteProject(${project.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                projectsList.appendChild(row);
+            });
+        }
+
+        function searchProjects() {
+            const searchTerm = document.getElementById('projectSearch').value.toLowerCase();
+            const filteredProjects = projects.filter(project => 
+                project.clientName.toLowerCase().includes(searchTerm) || 
+                project.serviceName.toLowerCase().includes(searchTerm) ||
+                project.employeeName.toLowerCase().includes(searchTerm) ||
+                project.status.toLowerCase().includes(searchTerm) ||
+                (project.notes && project.notes.toLowerCase().includes(searchTerm))
+            );
+            
+            const projectsList = document.getElementById('projectsList');
+            projectsList.innerHTML = '';
+            
+            if (filteredProjects.length === 0) {
+                projectsList.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 30px;">
+                            No projects found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredProjects.forEach(project => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${project.id}</td>
+                    <td>${project.clientName}</td>
+                    <td>${project.serviceName}</td>
+                    <td>${project.employeeName}</td>
+                    <td>${formatDate(project.startDate)}</td>
+                    <td><span class="status-badge">${project.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="showEditProjectForm(${project.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteProject(${project.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                projectsList.appendChild(row);
+            });
+        }
+
+        // ========== QUOTATION FUNCTIONS ==========
+        function showCreateQuotationForm() {
+            currentQuotationId = null;
+            document.getElementById('quotationFormTitle').textContent = 'Create New Quotation';
+            document.getElementById('quotationClient').value = '';
+            document.getElementById('quotationNumber').value = `Q-${nextQuotationNumber.toString().padStart(4, '0')}`;
+            document.getElementById('quotationDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('quotationRef').value = '';
+            document.getElementById('quotationItems').innerHTML = '';
+            document.getElementById('quotationLabor').value = '0';
+            document.getElementById('quotationVAT').value = 'exclusive';
+            document.getElementById('quotationNotes').value = 'Thanks for your business...';
+            
+            // Add first empty item
+            addQuotationItem();
+            
+            document.getElementById('quotationForm').style.display = 'block';
+        }
+
+        function addQuotationItem(item = { qty: 1, description: '', unitPrice: 0 }) {
+            const itemId = Date.now();
+            const itemHTML = `
+                <div class="quotation-item" data-id="${itemId}" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <input type="number" class="form-control" style="width: 60px;" min="1" value="${item.qty}" placeholder="Qty" onchange="updateQuotationItem(${itemId}, 'qty', this.value)">
+                    <input type="text" class="form-control" style="flex: 2;" value="${item.description}" placeholder="Description" onchange="updateQuotationItem(${itemId}, 'description', this.value)">
+                    <input type="number" class="form-control" style="width: 120px;" step="0.01" value="${item.unitPrice}" placeholder="Unit Price" onchange="updateQuotationItem(${itemId}, 'unitPrice', this.value)">
+                    <span style="width: 100px; text-align: right;">
+                        ${(item.qty * item.unitPrice).toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}
+                    </span>
+                    <button type="button" class="modern-button danger" style="padding: 5px 10px;" onclick="removeQuotationItem(${itemId})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('quotationItems').insertAdjacentHTML('beforeend', itemHTML);
+            return itemId;
+        }
+
+        function updateQuotationItem(id, field, value) {
+            const itemElement = document.querySelector(`.quotation-item[data-id="${id}"]`);
+            if (!itemElement) return;
+            
+            if (field === 'qty' || field === 'unitPrice') {
+                const qty = parseFloat(itemElement.querySelector('input[placeholder="Qty"]').value) || 0;
+                const unitPrice = parseFloat(itemElement.querySelector('input[placeholder="Unit Price"]').value) || 0;
+                const total = qty * unitPrice;
+                
+                itemElement.querySelector('span').textContent = 
+                    total.toLocaleString('en-KE', {style: 'currency', currency: 'KES'});
+            }
+        }
+
+        function removeQuotationItem(id) {
+            const itemElement = document.querySelector(`.quotation-item[data-id="${id}"]`);
+            if (itemElement) {
+                itemElement.remove();
+            }
+        }
+
+        function cancelQuotationForm() {
+            document.getElementById('quotationForm').style.display = 'none';
+        }
+
+        function saveQuotation() {
+            const clientId = parseInt(document.getElementById('quotationClient').value);
+            const number = document.getElementById('quotationNumber').value.trim();
+            const date = document.getElementById('quotationDate').value;
+            const ref = document.getElementById('quotationRef').value.trim();
+            const labor = parseFloat(document.getElementById('quotationLabor').value) || 0;
+            const vatStatus = document.getElementById('quotationVAT').value;
+            const notes = document.getElementById('quotationNotes').value.trim();
+
+            if (!clientId || !number || !date) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Collect items
+            const items = [];
+            const itemElements = document.querySelectorAll('.quotation-item');
+            itemElements.forEach(itemElement => {
+                const qty = parseFloat(itemElement.querySelector('input[placeholder="Qty"]').value) || 0;
+                const description = itemElement.querySelector('input[placeholder="Description"]').value.trim();
+                const unitPrice = parseFloat(itemElement.querySelector('input[placeholder="Unit Price"]').value) || 0;
+                
+                if (description && qty > 0) {
+                    items.push({
+                        qty,
+                        description,
+                        unitPrice,
+                        total: qty * unitPrice
+                    });
+                }
+            });
+
+            if (items.length === 0) {
+                showToast('Please add at least one valid item', 'error');
+                return;
+            }
+
+            try {
+                const client = clients.find(c => c.id === clientId);
+                if (!client) {
+                    showToast('Invalid client selected', 'error');
+                    return;
+                }
+
+                // Calculate subtotal
+                const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+                const total = subtotal + labor;
+
+                const newQuotation = {
+                    id: Date.now(),
+                    number,
+                    clientId,
+                    clientName: client.name,
+                    date,
+                    ref,
+                    items,
+                    subtotal,
+                    labor,
+                    total,
+                    vatStatus,
+                    notes,
+                    status: 'Draft',
+                    createdAt: new Date().toISOString()
+                };
+
+                quotations.push(newQuotation);
+                localStorage.setItem('nestgen_quotations', JSON.stringify(quotations));
+                
+                // Increment quotation number if this was a new one
+                if (number === `Q-${nextQuotationNumber.toString().padStart(4, '0')}`) {
+                    nextQuotationNumber++;
+                }
+                
+                showToast('Quotation created successfully');
+                renderQuotations();
+                cancelQuotationForm();
+                previewQuotation(newQuotation);
+            } catch (error) {
+                showToast('Error creating quotation: ' + error.message, 'error');
+            }
+        }
+
+        function renderQuotations() {
+            const quotationsList = document.getElementById('quotationsList');
+            quotationsList.innerHTML = '';
+            
+            if (quotations.length === 0) {
+                document.getElementById('quotationsEmpty').style.display = 'block';
+                document.getElementById('quotationsTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('quotationsEmpty').style.display = 'none';
+            document.getElementById('quotationsTable').style.display = 'table';
+            
+            quotations.forEach(quotation => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${quotation.number}</td>
+                    <td>${quotation.clientName}</td>
+                    <td>${formatDate(quotation.date)}</td>
+                    <td>${quotation.total.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    <td><span class="status-badge">${quotation.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="previewQuotation(${quotation.id})">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                        <button class="modern-button" onclick="sendQuotation(${quotation.id})">
+                            <i class="bi bi-envelope"></i> Send
+                        </button>
+                    </td>
+                `;
+                quotationsList.appendChild(row);
+            });
+        }
+
+        function previewQuotation(quotationId) {
+            const quotation = typeof quotationId === 'object' ? quotationId : quotations.find(q => q.id === quotationId);
+            if (!quotation) return;
+
+            const client = clients.find(c => c.id === quotation.clientId);
+            
+            // Format items table
+            let itemsHTML = '';
+            quotation.items.forEach(item => {
+                itemsHTML += `
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.qty}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.description}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: right;">${item.unitPrice.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: right;">${item.total.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    </tr>
+                `;
+            });
+            
+            const quotationHTML = `
+                <div class="header">
+                    <div class="content-row">
+                        <div class="image-header">
+                            <img src="Image/Logo.png" alt="Management Logo" class="center-image" style="max-width: 150px;">
+                        </div>
+                        <div class="text-container">
+                            <h1>Nestgen Solutions</h1>
+                            <p>Your One Stop Tech Community</p>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                    <div>
+                        <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Quotation To</h3>
+                        <p style="margin: 5px 0; font-weight: bold;">${quotation.clientName}</p>
+                        ${client ? `
+                            <p style="margin: 5px 0;">${client.contactPerson || ''}</p>
+                            <p style="margin: 5px 0;">${client.phone || ''}</p>
+                            <p style="margin: 5px 0;">${client.email || ''}</p>
+                            ${client.address ? `<p style="margin: 5px 0;">${client.address}</p>` : ''}
+                        ` : ''}
+                    </div>
+                    <div>
+                        <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Quotation Details</h3>
+                        <p style="margin: 5px 0;"><strong>Quotation #:</strong> ${quotation.number}</p>
+                        <p style="margin: 5px 0;"><strong>Date:</strong> ${formatDate(quotation.date)}</p>
+                        ${quotation.ref ? `<p style="margin: 5px 0;"><strong>Ref #:</strong> ${quotation.ref}</p>` : ''}
+                        <p style="margin: 5px 0;"><strong>Status:</strong> ${quotation.status}</p>
+                    </div>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #2c3e50; color: white;">
+                            <th style="padding: 8px; text-align: left;">Qty</th>
+                            <th style="padding: 8px; text-align: left;">Description</th>
+                            <th style="padding: 8px; text-align: right;">Unit Price</th>
+                            <th style="padding: 8px; text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${itemsHTML}
+                        <tr>
+                            <td colspan="3" style="padding: 8px; text-align: right; border-top: 1px solid #eee;"><strong>Sub Total</strong></td>
+                            <td style="padding: 8px; text-align: right; border-top: 1px solid #eee;"><strong>${quotation.subtotal.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding: 8px; text-align: right;"><strong>Installation and Commissioning</strong></td>
+                            <td style="padding: 8px; text-align: right;">${quotation.labor.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding: 8px; text-align: right;"><strong>Total (${quotation.vatStatus === 'exclusive' ? 'VAT Exclusive' : 'VAT Inclusive'})</strong></td>
+                            <td style="padding: 8px; text-align: right;"><strong>${quotation.total.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 20px;">
+                    <p style="margin: 5px 0;">${quotation.notes || 'Thanks for your business...'}</p>
+                </div>
+                
+                <div style="margin-top: 40px; display: flex; justify-content: space-between;">
+                    <div>
+                        <p style="margin: 5px 0;"><strong>Prepared By:</strong></p>
+                        <p style="margin: 5px 0;">Nestgen Solutions Team</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="margin: 5px 0;"><strong>For:</strong> ${quotation.clientName}</p>
+                        <p style="margin: 5px 0;"><strong>Date:</strong> ${formatDate(quotation.date)}</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: center; color: #7f8c8d; font-size: 12px;">
+                    <p>Nestgen Solutions - Your One Stop Tech Community</p>
+                    <p>P.O. Box 212, Ndhiwa | Phone: +254 708732262 | Email: nesoltd1@gmail.com</p>
+                </div>
+            `;
+
+            document.getElementById('quotationPreviewContent').innerHTML = quotationHTML;
+            document.getElementById('quotationPreviewModal').style.display = 'flex';
+        }
+
+        function closeQuotationPreview() {
+            document.getElementById('quotationPreviewModal').style.display = 'none';
+        }
+
+        function printQuotation() {
+            const printContent = document.getElementById('quotationPreviewContent').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            
+            // Re-render the page
+            window.location.reload();
+        }
+
+        function shareQuotationViaWhatsApp() {
+            const quotationPreview = document.getElementById('quotationPreviewContent');
+            const clientName = quotationPreview.querySelector('p[style*="font-weight: bold"]').textContent;
+            const quotationNumber = quotationPreview.querySelector('p[style*="margin: 5px 0;"]:first-child').textContent.replace('Quotation #:', '').trim();
+            const totalAmount = quotationPreview.querySelector('td[style*="text-align: right;"]:last-child').textContent;
+            
+            // Find client phone number
+            const quotation = quotations.find(q => q.number === quotationNumber);
+            let clientPhone = '';
+            if (quotation) {
+                const client = clients.find(c => c.id === quotation.clientId);
+                if (client) {
+                    clientPhone = client.phone;
+                }
+            }
+            
+            // Create WhatsApp message
+            const message = `Quotation Notification\n\nClient: ${clientName}\nQuotation #: ${quotationNumber}\nTotal Amount: ${totalAmount}\n\nPlease review the attached quotation.`;
+            
+            // For mobile - open WhatsApp with the message
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                const whatsappLink = `https://wa.me/${clientPhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert('Please download the quotation and share it manually via WhatsApp along with this message:\n\n' + message);
+            }
+        }
+
+        function sendQuotation(quotationId) {
+            const quotation = quotations.find(q => q.id === quotationId);
+            if (!quotation) return;
+
+            // Update status
+            quotation.status = 'Sent';
+            localStorage.setItem('nestgen_quotations', JSON.stringify(quotations));
+            renderQuotations();
+            
+            showToast(`Quotation ${quotation.number} sent to ${quotation.clientName}`);
+            // In a real implementation, you would send an email here
+        }
+
+        function convertQuotationToInvoice() {
+            showToast('Conversion to invoice would be implemented', 'info');
+            // In a real implementation, this would create an invoice from the quotation
+        }
+
+        function searchQuotations() {
+            const searchTerm = document.getElementById('quotationSearch').value.toLowerCase();
+            const filteredQuotations = quotations.filter(quotation => 
+                quotation.clientName.toLowerCase().includes(searchTerm) || 
+                quotation.number.toLowerCase().includes(searchTerm) ||
+                quotation.status.toLowerCase().includes(searchTerm)
+            );
+            
+            const quotationsList = document.getElementById('quotationsList');
+            quotationsList.innerHTML = '';
+            
+            if (filteredQuotations.length === 0) {
+                quotationsList.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            No quotations found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredQuotations.forEach(quotation => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${quotation.number}</td>
+                    <td>${quotation.clientName}</td>
+                    <td>${formatDate(quotation.date)}</td>
+                    <td>${quotation.total.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    <td><span class="status-badge">${quotation.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="previewQuotation(${quotation.id})">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                        <button class="modern-button" onclick="sendQuotation(${quotation.id})">
+                            <i class="bi bi-envelope"></i> Send
+                        </button>
+                    </td>
+                `;
+                quotationsList.appendChild(row);
+            });
+        }
+
+        // ========== INVOICE FUNCTIONS ==========
+	
+        function showCreateInvoiceForm() {
+            currentInvoiceId = null;
+            document.getElementById('invoiceFormTitle').textContent = 'Create New Invoice';
+            document.getElementById('invoiceClient').value = '';
+            document.getElementById('invoiceProject').innerHTML = '<option value="">Select Project/Service</option>';
+            document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
+            
+            // Set due date to 30 days from now
+            const dueDate = new Date();
+            dueDate.setDate(dueDate.getDate() + 30);
+            document.getElementById('invoiceDueDate').value = dueDate.toISOString().split('T')[0];
+            
+            document.getElementById('invoiceItems').innerHTML = '';
+            document.getElementById('invoiceStatus').value = 'Pending';
+            document.getElementById('invoiceNotes').value = '';
+            
+            // Add first empty item
+            addInvoiceItem();
+            
+            document.getElementById('invoiceForm').style.display = 'block';
+        }
+
+        function addInvoiceItem(item = { description: '', amount: 0 }) {
+            const itemId = Date.now();
+            const itemHTML = `
+                <div class="invoice-item" data-id="${itemId}" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <input type="text" class="form-control" style="flex: 2;" value="${item.description}" placeholder="Description" onchange="updateInvoiceItem(${itemId}, 'description', this.value)">
+                    <input type="number" class="form-control" style="width: 120px;" step="0.01" value="${item.amount}" placeholder="Amount" onchange="updateInvoiceItem(${itemId}, 'amount', this.value)">
+                    <button type="button" class="modern-button danger" style="padding: 5px 10px;" onclick="removeInvoiceItem(${itemId})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('invoiceItems').insertAdjacentHTML('beforeend', itemHTML);
+            return itemId;
+        }
+
+        function updateInvoiceItem(id, field, value) {
+            // You can add any specific update logic here if needed
+        }
+
+        function removeInvoiceItem(id) {
+            const itemElement = document.querySelector(`.invoice-item[data-id="${id}"]`);
+            if (itemElement) {
+                itemElement.remove();
+            }
+        }
+
+        function loadClientProjects(clientId) {
+            const projectSelect = document.getElementById('invoiceProject');
+            projectSelect.innerHTML = '<option value="">Select Project/Service</option>';
+            
+            if (!clientId) return;
+            
+            // Get projects for this client
+            const clientProjects = projects.filter(p => p.clientId == clientId);
+            
+            if (clientProjects.length > 0) {
+                clientProjects.forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = `${project.serviceName} (Project #${project.id})`;
+                    projectSelect.appendChild(option);
+                });
+            } else {
+                // If no projects, show services
+                services.forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = 'service-' + service.id;
+                    option.textContent = `${service.name} (Service)`;
+                    projectSelect.appendChild(option);
+                });
+            }
+            
+            // Add custom option
+            const customOption = document.createElement('option');
+            customOption.value = 'custom';
+            customOption.textContent = 'Custom Invoice';
+            projectSelect.appendChild(customOption);
+        }
+
+        function cancelInvoiceForm() {
+            document.getElementById('invoiceForm').style.display = 'none';
+        }
+
+        function saveInvoice() {
+            const clientId = parseInt(document.getElementById('invoiceClient').value);
+            const projectId = document.getElementById('invoiceProject').value;
+            const date = document.getElementById('invoiceDate').value;
+            const dueDate = document.getElementById('invoiceDueDate').value;
+            const status = document.getElementById('invoiceStatus').value;
+            const notes = document.getElementById('invoiceNotes').value.trim();
+
+            if (!clientId || !projectId || !date || !dueDate) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Collect items
+            const items = [];
+            const itemElements = document.querySelectorAll('.invoice-item');
+            itemElements.forEach(itemElement => {
+                const description = itemElement.querySelector('input[placeholder="Description"]').value.trim();
+                const amount = parseFloat(itemElement.querySelector('input[placeholder="Amount"]').value) || 0;
+                
+                if (description && amount > 0) {
+                    items.push({
+                        description,
+                        amount
+                    });
+                }
+            });
+
+            if (items.length === 0) {
+                showToast('Please add at least one valid item', 'error');
+                return;
+            }
+
+            // Calculate total amount
+            const amount = items.reduce((sum, item) => sum + item.amount, 0);
+
+            const client = clients.find(c => c.id === clientId);
+            if (!client) {
+                showToast('Invalid client selected', 'error');
+                return;
+            }
+
+            let serviceName = "Custom Service";
+            let projectName = "Custom Invoice";
+            
+            if (projectId.startsWith('service-')) {
+                const serviceId = parseInt(projectId.split('-')[1]);
+                const service = services.find(s => s.id === serviceId);
+                if (service) {
+                    serviceName = service.name;
+                    projectName = service.name;
+                }
+            } else if (projectId !== 'custom') {
+                const project = projects.find(p => p.id === parseInt(projectId));
+                if (project) {
+                    serviceName = project.serviceName;
+                    projectName = `Project #${project.id}`;
+                }
+            }
+
+            try {
+                const newInvoice = {
+                    id: Date.now(),
+                    number: `INV-${nextInvoiceNumber.toString().padStart(4, '0')}`,
+                    clientId,
+                    clientName: client.name,
+                    projectId: projectId === 'custom' ? null : projectId,
+                    projectName,
+                    serviceName,
+                    date,
+                    dueDate,
+                    amount,
+                    items,
+                    status,
+                    notes,
+                    createdAt: new Date().toISOString()
+                };
+
+                invoices.push(newInvoice);
+                localStorage.setItem('nestgen_invoices', JSON.stringify(invoices));
+                
+                nextInvoiceNumber++;
+                
+                showToast('Invoice created successfully');
+                renderInvoices();
+                cancelInvoiceForm();
+                previewInvoice(newInvoice);
+            } catch (error) {
+                showToast('Error creating invoice: ' + error.message, 'error');
+            }
+        }
+
+        function renderInvoices() {
+            const invoicesList = document.getElementById('invoicesList');
+            invoicesList.innerHTML = '';
+            
+            if (invoices.length === 0) {
+                document.getElementById('invoicesEmpty').style.display = 'block';
+                document.getElementById('invoicesTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('invoicesEmpty').style.display = 'none';
+            document.getElementById('invoicesTable').style.display = 'table';
+            
+            invoices.forEach(invoice => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${invoice.number}</td>
+                    <td>${invoice.clientName}</td>
+                    <td>${formatDate(invoice.date)}</td>
+                    <td>${formatDate(invoice.dueDate)}</td>
+                    <td>${invoice.amount.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    <td><span class="status-badge">${invoice.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="previewInvoice('${invoice.number}')">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                        <button class="modern-button" onclick="sendInvoiceReminder('${invoice.number}')" ${invoice.status === 'Paid' ? 'disabled style="opacity: 0.5;"' : ''}>
+                            <i class="bi bi-envelope"></i> Remind
+                        </button>
+                    </td>
+                `;
+                invoicesList.appendChild(row);
+            });
+        }
+
+        function previewInvoice(invoiceNumber) {
+            const invoice = typeof invoiceNumber === 'object' ? invoiceNumber : invoices.find(i => i.number === invoiceNumber);
+            if (!invoice) return;
+
+            const client = clients.find(c => c.id === invoice.clientId);
+            const today = new Date();
+            const dueDate = new Date(invoice.dueDate);
+            const isOverdue = invoice.status !== 'Paid' && dueDate < today;
+            
+            if (isOverdue) {
+                invoice.status = 'Reminder';
+                localStorage.setItem('nestgen_invoices', JSON.stringify(invoices));
+            }
+
+            // Format items table
+            let itemsHTML = '';
+            invoice.items.forEach(item => {
+                itemsHTML += `
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">${item.description}</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee; text-align: right;">${item.amount.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    </tr>
+                `;
+            });
+
+            const invoiceHTML = `
+                <div class="header">
+                    <div class="content-row">
+                        <div class="image-header">
+                            <img src="Image/Logo.png" alt="Management Logo" class="center-image" style="max-width: 150px;">
+                        </div>
+                        <div class="text-container">
+                            <h1>Nestgen Solutions</h1>
+                            <p>Your One Stop Tech Community</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="font-family: Arial, sans-serif;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                        <div>
+                            <p style="margin: 5px 0 0; color: #7f8c8d;">P.O. Box 212 Ndhiwa</p>
+                            <p style="margin: 5px 0 0; color: #7f8c8d;">Phone: +254 708732262</p>
+                            <p style="margin: 5px 0 0; color: #7f8c8d;">Email: nesoltd1@gmail.com</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <h2 style="color: #2c3e50; margin: 0 0 10px;">INVOICE</h2>
+                            <p style="margin: 5px 0; color: #7f8c8d;"><strong>Invoice #:</strong> ${invoice.number}</p>
+                            <p style="margin: 5px 0; color: #7f8c8d;"><strong>Date:</strong> ${formatDate(invoice.date)}</p>
+                            <p style="margin: 5px 0; color: #7f8c8d;"><strong>Due Date:</strong> ${formatDate(invoice.dueDate)}</p>
+                            <p style="margin: 5px 0; color: #7f8c8d;"><strong>Status:</strong> <span style="color: ${invoice.status === 'Paid' ? 'green' : invoice.status === 'Overdue' ? 'red' : 'orange'}">${invoice.status}</span></p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                        <div style="width: 50%;">
+                            <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Bill To</h3>
+                            <p style="margin: 5px 0; font-weight: bold;">${invoice.clientName}</p>
+                            ${client ? `
+                                <p style="margin: 5px 0;">${client.contactPerson}</p>
+                                <p style="margin: 5px 0;">${client.phone}</p>
+                                <p style="margin: 5px 0;">${client.email}</p>
+                                ${client.address ? `<p style="margin: 5px 0;">${client.address}</p>` : ''}
+                            ` : ''}
+                        </div>
+                        <div style="width: 45%;">
+                            <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Payment Details</h3>
+                            <p style="margin: 5px 0;"><strong>Bank Name:</strong> SBM Bank</p>
+                            <p style="margin: 5px 0;"><strong>Account Name:</strong> Odhiambo Hezekia Abuoga</p>
+                            <p style="margin: 5px 0;"><strong>Account Number:</strong> 0362399933001</p>
+                            <p style="margin: 5px 0;"><strong>Branch:</strong> River Road</p>
+                            <p style="margin: 5px 0;"><strong>SWIFT Code:</strong> SBMKKENA</p>
+                        </div>
+                    </div>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                        <thead>
+                            <tr style="background-color: #2c3e50; color: white;">
+                                <th style="padding: 10px; text-align: left;">Description</th>
+                                <th style="padding: 10px; text-align: right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itemsHTML}
+                            <tr>
+                                <td style="padding: 10px; text-align: right;"><strong>Total</strong></td>
+                                <td style="padding: 10px; text-align: right;"><strong>${invoice.amount.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <p style="margin: 5px 0; color: #7f8c8d; font-size: 14px;">
+                            <strong>Notes:</strong> Please make payment within 5 days of receiving this invoice.
+                        </p>
+                        <p style="margin: 5px 0; color: #7f8c8d; font-size: 14px;">
+                            <strong>Late Payment:</strong> Kindly alart in 2 days time if payment is scheduled to be late, failure may attract a 1.5% penalty applied to overdue invoices.
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 30px; text-align: center; color: #7f8c8d; font-size: 12px;">
+                        <p>Thank you for your business!</p>
+                        <p>'<span style="color: #367588;">Nestgen Solutions - Your One Stop Tech Community</span>'</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('invoicePreviewContent').innerHTML = invoiceHTML;
+            document.getElementById('invoicePreviewModal').style.display = 'flex';
+        }
+
+        function closeInvoicePreview() {
+            document.getElementById('invoicePreviewModal').style.display = 'none';
+        }
+
+        function printInvoice() {
+            const printContent = document.getElementById('invoicePreviewContent').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            
+            // Re-render the page
+            window.location.reload();
+        }
+
+        function shareInvoiceViaWhatsApp() {
+            const invoicePreview = document.getElementById('invoicePreviewContent');
+            const clientName = invoicePreview.querySelector('p[style*="font-weight: bold"]').textContent;
+            const invoiceNumber = invoicePreview.querySelector('p[style*="margin: 5px 0; color: #7f8c8d;"]:first-child').textContent.replace('Invoice #:', '').trim();
+            const amount = invoicePreview.querySelector('td[style*="text-align: right;"]:last-child').textContent;
+            
+            // Find client phone number
+            const invoice = invoices.find(i => i.number === invoiceNumber);
+            let clientPhone = '';
+            if (invoice) {
+                const client = clients.find(c => c.id === invoice.clientId);
+                if (client) {
+                    clientPhone = client.phone;
+                }
+            }
+            
+            // Create WhatsApp message
+            const message = `Invoice Notification\n\nClient: ${clientName}\nInvoice #: ${invoiceNumber}\nAmount Due: ${amount}\n\nPlease check the attached invoice.`;
+            
+            // For mobile - open WhatsApp with the message
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                const whatsappLink = `https://wa.me/${clientPhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert('Please download the invoice and share it manually via WhatsApp along with this message:\n\n' + message);
+            }
+        }
+
+        function downloadInvoicePDF() {
+            showToast('PDF generation would be implemented with a library like jsPDF', 'info');
+            // In a real implementation, you would use jsPDF or similar library
+            // This is just a placeholder for the functionality
+        }
+
+        function sendInvoiceReminder(invoiceNumber) {
+            const invoice = invoices.find(i => i.number === invoiceNumber);
+            if (!invoice) return;
+
+            showToast(`Reminder sent to ${invoice.clientName} for invoice ${invoice.number}`);
+            
+            // In a real implementation, you would send an email here
+        }
+
+        function searchInvoices() {
+            const searchTerm = document.getElementById('invoiceSearch').value.toLowerCase();
+            const filteredInvoices = invoices.filter(invoice => 
+                invoice.clientName.toLowerCase().includes(searchTerm) || 
+                invoice.number.toString().includes(searchTerm) ||
+                invoice.status.toLowerCase().includes(searchTerm)
+            );
+            
+            const invoicesList = document.getElementById('invoicesList');
+            invoicesList.innerHTML = '';
+            
+            if (filteredInvoices.length === 0) {
+                invoicesList.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 30px;">
+                            No invoices found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredInvoices.forEach(invoice => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${invoice.number}</td>
+                    <td>${invoice.clientName}</td>
+                    <td>${formatDate(invoice.date)}</td>
+                    <td>${formatDate(invoice.dueDate)}</td>
+                    <td>${invoice.amount.toLocaleString('en-KE', {style: 'currency', currency: 'KES'})}</td>
+                    <td><span class="status-badge">${invoice.status}</span></td>
+                    <td>
+                        <button class="modern-button" onclick="previewInvoice('${invoice.number}')">
+                            <i class="bi bi-eye"></i> View
+                        </button>
+                        <button class="modern-button" onclick="sendInvoiceReminder('${invoice.number}')" ${invoice.status === 'Paid' ? 'disabled style="opacity: 0.5;"' : ''}>
+                            <i class="bi bi-envelope"></i> Remind
+                        </button>
+                    </td>
+                `;
+                invoicesList.appendChild(row);
+            });
+        }
+
+        // ========== SERVICE HISTORY FUNCTIONS ==========
+        function showAddServiceHistoryForm() {
+            currentServiceHistoryId = null;
+            document.getElementById('serviceHistoryFormTitle').textContent = 'Add Service Record';
+            document.getElementById('serviceHistoryProject').value = '';
+            document.getElementById('serviceHistoryClient').value = '';
+            document.getElementById('serviceHistoryService').value = '';
+            document.getElementById('serviceHistoryLocation').value = '';
+            document.getElementById('serviceHistoryEmployee').value = '';
+            document.getElementById('serviceHistoryDate').value = new Date().toISOString().split('T')[0];
+            
+            // Set next service date to 30 days from now by default
+            const nextDate = new Date();
+            nextDate.setDate(nextDate.getDate() + 30);
+            document.getElementById('serviceHistoryNextDate').value = nextDate.toISOString().split('T')[0];
+            
+            document.getElementById('serviceHistoryMaterials').innerHTML = '';
+            document.getElementById('serviceHistoryNotes').value = '';
+            
+            // Add first empty material
+            addServiceMaterial();
+            
+            document.getElementById('serviceHistoryForm').style.display = 'block';
+        }
+
+        function loadProjectDetails(projectId) {
+            const project = projects.find(p => p.id === parseInt(projectId));
+            if (!project) return;
+            
+            document.getElementById('serviceHistoryClient').value = project.clientName;
+            document.getElementById('serviceHistoryService').value = project.serviceName;
+        }
+
+        function addServiceMaterial(material = { name: '', quantity: 1 }) {
+            const materialId = Date.now();
+            const materialHTML = `
+                <div class="service-item" data-id="${materialId}" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <input type="text" class="form-control" style="flex: 2;" value="${material.name}" placeholder="Material Name" onchange="updateServiceMaterial(${materialId}, 'name', this.value)">
+                    <input type="number" class="form-control" style="width: 80px;" min="1" value="${material.quantity}" placeholder="Qty" onchange="updateServiceMaterial(${materialId}, 'quantity', this.value)">
+                    <button type="button" class="modern-button danger" style="padding: 5px 10px;" onclick="removeServiceMaterial(${materialId})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('serviceHistoryMaterials').insertAdjacentHTML('beforeend', materialHTML);
+            return materialId;
+        }
+
+        function updateServiceMaterial(id, field, value) {
+            // You can add any specific update logic here if needed
+        }
+
+        function removeServiceMaterial(id) {
+            const materialElement = document.querySelector(`.service-item[data-id="${id}"]`);
+            if (materialElement) {
+                materialElement.remove();
+            }
+        }
+
+        function cancelServiceHistoryForm() {
+            document.getElementById('serviceHistoryForm').style.display = 'none';
+        }
+
+        function saveServiceHistory() {
+            const projectId = parseInt(document.getElementById('serviceHistoryProject').value);
+            const location = document.getElementById('serviceHistoryLocation').value.trim();
+            const employeeId = parseInt(document.getElementById('serviceHistoryEmployee').value);
+            const serviceDate = document.getElementById('serviceHistoryDate').value;
+            const nextServiceDate = document.getElementById('serviceHistoryNextDate').value;
+            const notes = document.getElementById('serviceHistoryNotes').value.trim();
+
+            if (!projectId || !location || !employeeId || !serviceDate || !nextServiceDate) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Collect materials
+            const materials = [];
+            const materialElements = document.querySelectorAll('.service-item');
+            materialElements.forEach(materialElement => {
+                const name = materialElement.querySelector('input[placeholder="Material Name"]').value.trim();
+                const quantity = parseInt(materialElement.querySelector('input[placeholder="Qty"]').value) || 1;
+                
+                if (name) {
+                    materials.push({
+                        name,
+                        quantity
+                    });
+                }
+            });
+
+            const project = projects.find(p => p.id === projectId);
+            const employee = employees.find(e => e.id === employeeId);
+
+            if (!project || !employee) {
+                showToast('Invalid project or employee selected', 'error');
+                return;
+            }
+
+            try {
+                if (currentServiceHistoryId) {
+                    // Update existing service record
+                    const index = serviceHistory.findIndex(sh => sh.id === currentServiceHistoryId);
+                    if (index !== -1) {
+                        serviceHistory[index] = {
+                            id: currentServiceHistoryId,
+                            projectId,
+                            clientId: project.clientId,
+                            clientName: project.clientName,
+                            serviceName: project.serviceName,
+                            location,
+                            employeeId,
+                            employeeName: employee.name,
+                            serviceDate,
+                            nextServiceDate,
+                            materials,
+                            notes,
+                            createdAt: serviceHistory[index].createdAt
+                        };
+                        showToast('Service record updated successfully');
+                    }
+                } else {
+                    // Add new service record
+                    const newServiceHistory = {
+                        id: Date.now(),
+                        projectId,
+                        clientId: project.clientId,
+                        clientName: project.clientName,
+                        serviceName: project.serviceName,
+                        location,
+                        employeeId,
+                        employeeName: employee.name,
+                        serviceDate,
+                        nextServiceDate,
+                        materials,
+                        notes,
+                        createdAt: new Date().toISOString()
+                    };
+                    serviceHistory.push(newServiceHistory);
+                    showToast('Service record added successfully');
+                }
+
+                localStorage.setItem('nestgen_serviceHistory', JSON.stringify(serviceHistory));
+                renderServiceHistory();
+                cancelServiceHistoryForm();
+                
+                // Check if we need to send a reminder for the next service
+                checkServiceReminders();
+            } catch (error) {
+                showToast('Error saving service record: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteServiceHistory(id) {
+            const serviceRecord = serviceHistory.find(sh => sh.id === id);
+            if (!serviceRecord) return;
+
+            const confirmed = await showConfirmDialog(`Delete Service Record`, `Are you sure you want to delete this service record? This action cannot be undone.`);
+            if (confirmed) {
+                try {
+                    serviceHistory = serviceHistory.filter(sh => sh.id !== id);
+                    localStorage.setItem('nestgen_serviceHistory', JSON.stringify(serviceHistory));
+                    renderServiceHistory();
+                    showToast('Service record deleted successfully');
+                } catch (error) {
+                    showToast('Error deleting service record: ' + error.message, 'error');
+                }
+            }
+        }
+
+        function renderServiceHistory() {
+            const serviceHistoryList = document.getElementById('serviceHistoryList');
+            serviceHistoryList.innerHTML = '';
+            
+            if (serviceHistory.length === 0) {
+                document.getElementById('serviceHistoryEmpty').style.display = 'block';
+                document.getElementById('serviceHistoryTable').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('serviceHistoryEmpty').style.display = 'none';
+            document.getElementById('serviceHistoryTable').style.display = 'table';
+            
+            // Sort by next service date (ascending)
+            const sortedServiceHistory = [...serviceHistory].sort((a, b) => 
+                new Date(a.nextServiceDate) - new Date(b.nextServiceDate));
+            
+            sortedServiceHistory.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.clientName}</td>
+                    <td>${record.serviceName}</td>
+                    <td>${record.location}</td>
+                    <td>${record.employeeName}</td>
+                    <td>${formatDate(record.serviceDate)}</td>
+                    <td>
+                        ${formatDate(record.nextServiceDate)}
+                        ${new Date(record.nextServiceDate) < new Date() ? 
+                            '<span class="status-badge status-inactive">Overdue</span>' : 
+                            new Date(record.nextServiceDate) < new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) ? 
+                            '<span class="status-badge status-pending">Upcoming</span>' : ''}
+                    </td>
+                    <td>
+                        <button class="modern-button" onclick="viewServiceDetails(${record.id})">
+                            <i class="bi bi-eye"></i> Details
+                        </button>
+                        <button class="modern-button" onclick="editServiceHistory(${record.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteServiceHistory(${record.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                serviceHistoryList.appendChild(row);
+            });
+        }
+
+        function viewServiceDetails(id) {
+            const record = serviceHistory.find(sh => sh.id === id);
+            if (!record) return;
+
+            // Format materials list
+            let materialsHTML = '';
+            if (record.materials && record.materials.length > 0) {
+                materialsHTML = '<ul style="margin: 0; padding-left: 20px;">';
+                record.materials.forEach(material => {
+                    materialsHTML += `<li>${material.name} (Qty: ${material.quantity})</li>`;
+                });
+                materialsHTML += '</ul>';
+            } else {
+                materialsHTML = '<p>No materials recorded</p>';
+            }
+
+            const detailsHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Service Details</h3>
+                    <p><strong>Client:</strong> ${record.clientName}</p>
+                    <p><strong>Project/Service:</strong> ${record.serviceName}</p>
+                    <p><strong>Location:</strong> ${record.location}</p>
+                    <p><strong>Serviced By:</strong> ${record.employeeName}</p>
+                    <p><strong>Service Date:</strong> ${formatDate(record.serviceDate)}</p>
+                    <p><strong>Next Service Date:</strong> ${formatDate(record.nextServiceDate)}</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Materials Used/Replaced</h3>
+                    ${materialsHTML}
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Notes</h3>
+                    <p>${record.notes || 'No notes recorded'}</p>
+                </div>
+            `;
+
+            document.getElementById('serviceHistoryDetailsContent').innerHTML = detailsHTML;
+            document.getElementById('serviceHistoryDetailsModal').style.display = 'flex';
+            
+            // Store the current record ID for reminder sending
+            currentServiceHistoryId = id;
+        }
+
+        function closeServiceHistoryDetails() {
+            document.getElementById('serviceHistoryDetailsModal').style.display = 'none';
+            currentServiceHistoryId = null;
+        }
+
+        function editServiceHistory(id) {
+            const record = serviceHistory.find(sh => sh.id === id);
+            if (!record) return;
+
+            currentServiceHistoryId = id;
+            document.getElementById('serviceHistoryFormTitle').textContent = 'Edit Service Record';
+            document.getElementById('serviceHistoryProject').value = record.projectId;
+            document.getElementById('serviceHistoryClient').value = record.clientName;
+            document.getElementById('serviceHistoryService').value = record.serviceName;
+            document.getElementById('serviceHistoryLocation').value = record.location;
+            document.getElementById('serviceHistoryEmployee').value = record.employeeId;
+            document.getElementById('serviceHistoryDate').value = record.serviceDate;
+            document.getElementById('serviceHistoryNextDate').value = record.nextServiceDate;
+            document.getElementById('serviceHistoryNotes').value = record.notes || '';
+            
+            // Clear existing materials and add current ones
+            document.getElementById('serviceHistoryMaterials').innerHTML = '';
+            if (record.materials && record.materials.length > 0) {
+                record.materials.forEach(material => {
+                    addServiceMaterial(material);
+                });
+            } else {
+                addServiceMaterial();
+            }
+            
+            document.getElementById('serviceHistoryForm').style.display = 'block';
+        }
+
+        function sendServiceReminder() {
+            const record = serviceHistory.find(sh => sh.id === currentServiceHistoryId);
+            if (!record) return;
+
+            const client = clients.find(c => c.id === record.clientId);
+            if (!client) {
+                showToast('Client not found for this service record', 'error');
+                return;
+            }
+
+            const message = `Service Reminder\n\nClient: ${record.clientName}\nService: ${record.serviceName}\nLocation: ${record.location}\nNext Service Date: ${formatDate(record.nextServiceDate)}\n\nPlease contact us to schedule your next service visit.`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp share link
+            const whatsappLink = `https://wa.me/${client.phone.replace(/[^0-9]/g, '')}?text=${encodedMessage}`;
+            
+            // Open in new tab
+            window.open(whatsappLink, '_blank');
+            
+            showToast(`Reminder sent to ${record.clientName} for service ${record.serviceName}`);
+        }
+
+        function checkServiceReminders() {
+            const today = new Date();
+            const nextWeek = new Date(today);
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            
+            const upcomingServices = serviceHistory.filter(record => {
+                const nextDate = new Date(record.nextServiceDate);
+                return nextDate <= nextWeek && nextDate >= today;
+            });
+            
+            const overdueServices = serviceHistory.filter(record => {
+                const nextDate = new Date(record.nextServiceDate);
+                return nextDate < today;
+            });
+            
+            if (upcomingServices.length > 0 || overdueServices.length > 0) {
+                let alertMessage = '';
+                
+                if (overdueServices.length > 0) {
+                    alertMessage += `You have ${overdueServices.length} overdue service(s):\n`;
+                    overdueServices.forEach(service => {
+                        alertMessage += `- ${service.clientName}: ${service.serviceName} (Due: ${formatDate(service.nextServiceDate)})\n`;
+                    });
+                    alertMessage += '\n';
+                }
+                
+                if (upcomingServices.length > 0) {
+                    alertMessage += `You have ${upcomingServices.length} upcoming service(s) in the next 7 days:\n`;
+                    upcomingServices.forEach(service => {
+                        alertMessage += `- ${service.clientName}: ${service.serviceName} (Due: ${formatDate(service.nextServiceDate)})\n`;
+                    });
+                }
+                
+                if (confirm(alertMessage + '\nWould you like to view the service history now?')) {
+                    openTab('serviceHistory');
+                }
+            }
+        }
+
+        function searchServiceHistory() {
+            const searchTerm = document.getElementById('serviceHistorySearch').value.toLowerCase();
+            const filteredServiceHistory = serviceHistory.filter(record => 
+                record.clientName.toLowerCase().includes(searchTerm) || 
+                record.serviceName.toLowerCase().includes(searchTerm) ||
+                record.location.toLowerCase().includes(searchTerm) ||
+                record.employeeName.toLowerCase().includes(searchTerm) ||
+                (record.notes && record.notes.toLowerCase().includes(searchTerm))
+            );
+            
+            const serviceHistoryList = document.getElementById('serviceHistoryList');
+            serviceHistoryList.innerHTML = '';
+            
+            if (filteredServiceHistory.length === 0) {
+                serviceHistoryList.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 30px;">
+                            No service records found matching your search
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredServiceHistory.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.clientName}</td>
+                    <td>${record.serviceName}</td>
+                    <td>${record.location}</td>
+                    <td>${record.employeeName}</td>
+                    <td>${formatDate(record.serviceDate)}</td>
+                    <td>
+                        ${formatDate(record.nextServiceDate)}
+                        ${new Date(record.nextServiceDate) < new Date() ? 
+                            '<span class="status-badge status-inactive">Overdue</span>' : 
+                            new Date(record.nextServiceDate) < new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) ? 
+                            '<span class="status-badge status-pending">Upcoming</span>' : ''}
+                    </td>
+                    <td>
+                        <button class="modern-button" onclick="viewServiceDetails(${record.id})">
+                            <i class="bi bi-eye"></i> Details
+                        </button>
+                        <button class="modern-button" onclick="editServiceHistory(${record.id})">
+                            <i class="bi bi-pencil"></i> Edit
+                        </button>
+                        <button class="modern-button danger" onclick="deleteServiceHistory(${record.id})">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                `;
+                serviceHistoryList.appendChild(row);
+            });
+        }
+
+        function populateCompletedProjectsDropdown() {
+            const dropdown = document.getElementById('serviceHistoryProject');
+            dropdown.innerHTML = '<option value="">Select Project</option>';
+            
+            // Only show completed projects
+            const completedProjects = projects.filter(p => p.status === 'Completed');
+            
+            if (completedProjects.length > 0) {
+                completedProjects.forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = `${project.clientName} - ${project.serviceName} (Project #${project.id})`;
+                    dropdown.appendChild(option);
+                });
+            }
+        }
+
+        function populateServiceHistoryEmployeeDropdown() {
+            const dropdown = document.getElementById('serviceHistoryEmployee');
+            dropdown.innerHTML = '<option value="">Select Employee</option>';
+            
+            // Only show active employees
+            const activeEmployees = employees.filter(e => e.status === 'Active');
+            
+            if (activeEmployees.length > 0) {
+                activeEmployees.forEach(employee => {
+                    const option = document.createElement('option');
+                    option.value = employee.id;
+                    option.textContent = `${employee.name} (${employee.position})`;
+                    dropdown.appendChild(option);
+                });
+            }
+        }
+
+        // ========== HELPER FUNCTIONS ==========
+        function populateClientDropdowns() {
+            // Populate for projects
+            const projectClientDropdown = document.getElementById('projectClient');
+            projectClientDropdown.innerHTML = '<option value="">Select Client</option>';
+            
+            // Populate for quotations
+            const quotationClientDropdown = document.getElementById('quotationClient');
+            quotationClientDropdown.innerHTML = '<option value="">Select Client</option>';
+            
+            // Populate for invoices
+            const invoiceClientDropdown = document.getElementById('invoiceClient');
+            invoiceClientDropdown.innerHTML = '<option value="">Select Client</option>';
+            
+            clients.forEach(client => {
+                if (client.status === 'Active') {
+                    const option1 = document.createElement('option');
+                    option1.value = client.id;
+                    option1.textContent = client.name;
+                    projectClientDropdown.appendChild(option1);
+                    
+                    const option2 = document.createElement('option');
+                    option2.value = client.id;
+                    option2.textContent = client.name;
+                    quotationClientDropdown.appendChild(option2);
+                    
+                    const option3 = document.createElement('option');
+                    option3.value = client.id;
+                    option3.textContent = client.name;
+                    invoiceClientDropdown.appendChild(option3);
+                }
+            });
+        }
+
+        function populateServiceDropdown() {
+            const dropdown = document.getElementById('projectService');
+            dropdown.innerHTML = '<option value="">Select Service</option>';
+            
+            services.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = service.name;
+                dropdown.appendChild(option);
+            });
+        }
+
+        function populateEmployeeDropdown() {
+            const dropdown = document.getElementById('projectEmployee');
+            dropdown.innerHTML = '<option value="">Select Employee</option>';
+            
+            employees.forEach(employee => {
+                if (employee.status === 'Active') {
+                    const option = document.createElement('option');
+                    option.value = employee.id;
+                    option.textContent = employee.name;
+                    dropdown.appendChild(option);
+                }
+            });
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.right = '20px';
+            toast.style.padding = '12px 24px';
+            toast.style.backgroundColor = type === 'success' ? 'var(--success-color)' : 
+                                         type === 'error' ? 'var(--danger-color)' : 
+                                         type === 'info' ? 'var(--primary-color)' : 
+                                         'var(--warning-color)';
+            toast.style.color = 'white';
+            toast.style.borderRadius = '6px';
+            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            toast.style.zIndex = '1000';
+            toast.style.transform = 'translateY(100px)';
+            toast.style.opacity = '0';
+            toast.style.transition = 'all 0.3s ease';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        async function showConfirmDialog(title, message) {
+            return new Promise((resolve) => {
+                const dialog = document.createElement('div');
+                dialog.style.position = 'fixed';
+                dialog.style.top = '0';
+                dialog.style.left = '0';
+                dialog.style.right = '0';
+                dialog.style.bottom = '0';
+                dialog.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                dialog.style.display = 'flex';
+                dialog.style.justifyContent = 'center';
+                dialog.style.alignItems = 'center';
+                dialog.style.zIndex = '1000';
+                
+                const content = document.createElement('div');
+                content.style.backgroundColor = 'white';
+                content.style.padding = '24px';
+                content.style.borderRadius = '8px';
+                content.style.maxWidth = '400px';
+                content.style.width = '90%';
+                content.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+                
+                content.innerHTML = `
+                    <h3 style="margin-top: 0; color: var(--dark-color);">${title}</h3>
+                    <p style="margin-bottom: 24px;">${message}</p>
+                    <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                        <button class="modern-button secondary" id="cancelBtn">
+                            <i class="bi bi-x-lg"></i> Cancel
+                        </button>
+                        <button class="modern-button danger" id="confirmBtn">
+                            <i class="bi bi-check-lg"></i> Confirm
+                        </button>
+                    </div>
+                `;
+                
+                dialog.appendChild(content);
+                document.body.appendChild(dialog);
+                
+                document.getElementById('cancelBtn').addEventListener('click', () => {
+                    document.body.removeChild(dialog);
+                    resolve(false);
+                });
+                
+                document.getElementById('confirmBtn').addEventListener('click', () => {
+                    document.body.removeChild(dialog);
+                    resolve(true);
+                });
+            });
+        }
+
+        function addSampleData() {
+            // Sample clients
+            clients = [
+                {
+                    id: 1,
+                    name: "ABC Corporation",
+                    contactPerson: "John Doe",
+                    phone: "+254712345678",
+                    email: "john@abccorp.com",
+                    address: "123 Business Ave, Nairobi",
+                    status: "Active",
+                    registrationDate: new Date().toISOString().split('T')[0]
+                },
+                {
+                    id: 2,
+                    name: "XYZ Enterprises",
+                    contactPerson: "Jane Smith",
+                    phone: "+254723456789",
+                    email: "jane@xyz.com",
+                    address: "456 Trade Street, Mombasa",
+                    status: "Active",
+                    registrationDate: new Date().toISOString().split('T')[0]
+                }
+            ];
+            
+            // Sample services
+            services = [
+                {
+                    id: 1,
+                    name: "CCTV Installation",
+                    description: "Complete CCTV system installation including cameras, DVR, and monitoring",
+                    category: "Security",
+                    price: 50000,
+                    duration: "2 weeks"
+                },
+                {
+                    id: 2,
+                    name: "School Management System",
+                    description: "Comprehensive system for managing school operations, students, and staff",
+                    category: "Management System",
+                    price: 150000,
+                    duration: "4 weeks"
+                },
+                {
+                    id: 3,
+                    name: "Network Setup",
+                    description: "Office network installation and configuration",
+                    category: "Networking",
+                    price: 75000,
+                    duration: "1 week"
+                }
+            ];
+            
+            // Sample employees
+            employees = [
+                {
+                    id: 1,
+                    name: "Michael Johnson",
+                    position: "Security Technician",
+                    department: "Security Solutions",
+                    phone: "+254734567890",
+                    email: "michael@nestgensolutions.com",
+                    status: "Active",
+                    hireDate: new Date().toISOString().split('T')[0]
+                },
+                {
+                    id: 2,
+                    name: "Sarah Williams",
+                    position: "Software Developer",
+                    department: "Management Systems",
+                    phone: "+254745678901",
+                    email: "sarah@nestgensolutions.com",
+                    status: "Active",
+                    hireDate: new Date().toISOString().split('T')[0]
+                }
+            ];
+            
+            // Sample projects
+            projects = [
+                {
+                    id: 1,
+                    clientId: 1,
+                    serviceId: 1,
+                    employeeId: 1,
+                    startDate: new Date().toISOString().split('T')[0],
+                    endDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    status: "Completed",
+                    notes: "Install 8 cameras with night vision",
+                    clientName: "ABC Corporation",
+                    serviceName: "CCTV Installation",
+                    employeeName: "Michael Johnson"
+                },
+                {
+                    id: 2,
+                    clientId: 2,
+                    serviceId: 2,
+                    employeeId: 2,
+                    startDate: new Date().toISOString().split('T')[0],
+                    endDate: new Date(Date.now() + 28 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    status: "Completed",
+                    notes: "Implement school management system",
+                    clientName: "XYZ Enterprises",
+                    serviceName: "School Management System",
+                    employeeName: "Sarah Williams"
+                }
+            ];
+            
+            // Sample quotation matching your template
+            quotations = [
+                {
+                    id: 1,
+                    number: "Q-1001",
+                    clientId: 1,
+                    clientName: "ABC Corporation",
+                    date: new Date().toISOString().split('T')[0],
+                    ref: "+/-3+2/4/9/23",
+                    items: [
+                        { qty: 1, description: "Gate Charging System", unitPrice: 8500, total: 8500 },
+                        { qty: 1, description: "kPont POE Ethernet Switch", unitPrice: 4800, total: 4800 },
+                        { qty: 1, description: "Accessories", unitPrice: 500, total: 500 }
+                    ],
+                    subtotal: 13800,
+                    labor: 9000,
+                    total: 22800,
+                    vatStatus: "exclusive",
+                    notes: "Thanks for your business...",
+                    status: "Sent",
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            nextQuotationNumber = 1002;
+            
+            // Sample invoice
+            invoices = [
+                {
+                    id: 1,
+                    number: "INV-1001",
+                    clientId: 1,
+                    clientName: "ABC Corporation",
+                    projectId: 1,
+                    projectName: "Project #1",
+                    serviceName: "CCTV Installation",
+                    date: new Date().toISOString().split('T')[0],
+                    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    amount: 50000,
+                    status: "Pending",
+                    notes: "As discussed for office security upgrade",
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            nextInvoiceNumber = 1002;
+            
+            // Sample service history
+            serviceHistory = [
+                {
+                    id: 1,
+                    projectId: 1,
+                    clientId: 1,
+                    clientName: "ABC Corporation",
+                    serviceName: "CCTV Installation",
+                    location: "Main Office, Nairobi",
+                    employeeId: 1,
+                    employeeName: "Michael Johnson",
+                    serviceDate: new Date().toISOString().split('T')[0],
+                    nextServiceDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    materials: [
+                        { name: "Camera Lens Cleaner", quantity: 2 },
+                        { name: "Power Adapter", quantity: 1 }
+                    ],
+                    notes: "Performed routine maintenance on all cameras. Replaced one faulty power adapter.",
+                    createdAt: new Date().toISOString()
+                }
+            ];
+            
+            // Save all sample data
+            localStorage.setItem('nestgen_clients', JSON.stringify(clients));
+            localStorage.setItem('nestgen_services', JSON.stringify(services));
+            localStorage.setItem('nestgen_employees', JSON.stringify(employees));
+            localStorage.setItem('nestgen_projects', JSON.stringify(projects));
+            localStorage.setItem('nestgen_quotations', JSON.stringify(quotations));
+            localStorage.setItem('nestgen_invoices', JSON.stringify(invoices));
+            localStorage.setItem('nestgen_serviceHistory', JSON.stringify(serviceHistory));
+            
+            // Render all data
+            renderClients();
+            renderServices();
+            renderEmployees();
+            renderProjects();
+            renderQuotations();
+            renderInvoices();
+            renderServiceHistory();
+            populateClientDropdowns();
+            populateServiceDropdown();
+            populateEmployeeDropdown();
+            populateCompletedProjectsDropdown();
+            populateServiceHistoryEmployeeDropdown();
+            
+            showToast('Sample data loaded successfully');
+        }
+    </script>
+
+</body>
+</html>
